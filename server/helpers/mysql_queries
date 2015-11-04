@@ -1,0 +1,26 @@
+#This is for creating USERS table in mysql database
+CREATE TABLE users (
+user_id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+user_name VARCHAR(30) NOT NULL,
+display_name VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL,
+t_create TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+t_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
+
+#This is for creating MESSAGE_THREADS table in mysql database
+CREATE TABLE message_threads (
+thread_id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+thread_name VARCHAR(30) NOT NULL,
+user_id INT(10) UNSIGNED NOT NULL REFERENCES users(user_id)
+)
+
+#This is for creating MESSAGES table in mysql database
+CREATE TABLE messages (
+message_id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+message_text VARCHAR(1000),
+message_pic VARCHAR(1000),
+thread_id INT(10) UNSIGNED NOT NULL REFERENCES message_threads(thread_id),
+user_id INT(10) UNSIGNED NOT NULL REFERENCES users(user_id)
+)
